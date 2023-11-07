@@ -1,4 +1,4 @@
-# menthor
+# Menthor: Web App to find a Mentor
 
 ## Project setup
 ```
