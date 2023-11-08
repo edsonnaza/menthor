@@ -5,7 +5,7 @@ export default {
       message: payload.message
     };
     const response = await fetch(
-      `https://find-a-coach-f3127-default-rtdb.firebaseio.com/requests/${payload.coachId}.json`,
+      `${process.env.VUE_APP_FIREBASE_DATABASE_URL}/requests/${payload.coachId}.json`,
       {
         method: 'POST',
         body: JSON.stringify(newRequest)
@@ -30,7 +30,7 @@ export default {
     const coachId = context.rootGetters.userId;
     const token = context.rootGetters.token;
     const response = await fetch(
-      `https://find-a-coach-f3127-default-rtdb.firebaseio.com/requests/${coachId}.json?auth=` +
+      `${process.env.VUE_APP_FIREBASE_DATABASE_URL}/requests/${coachId}.json?auth=` +
         token
     );
     const responseData = await response.json();

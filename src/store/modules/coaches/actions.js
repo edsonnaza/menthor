@@ -1,3 +1,5 @@
+
+//console.log(process.env.VUE_APP_FIREBASE_DATABASE_URL);
 export default {
   async registerCoach(context, data) {
     const userId = context.rootGetters.userId;
@@ -12,7 +14,7 @@ export default {
     const token = context.rootGetters.token;
 
     const response = await fetch(
-      `https://find-a-coach-f3127-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=` +
+      `${process.env.VUE_APP_FIREBASE_DATABASE_URL}/coaches/${userId}.json?auth=` +
         token,
       {
         method: 'PUT',
@@ -37,7 +39,7 @@ export default {
     }
 
     const response = await fetch(
-      `https://find-a-coach-f3127-default-rtdb.firebaseio.com/coaches.json`
+      `${process.env.VUE_APP_FIREBASE_DATABASE_URL}/coaches.json`
     );
     const responseData = await response.json();
 
