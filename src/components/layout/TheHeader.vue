@@ -1,9 +1,15 @@
 <template>
   <header>
     <nav>
+    
+       <div class="logoDiv"> 
+        <div class="logoText">
       <h1>
-        <router-link to="/">Find a Coach</router-link>
-      </h1>
+        <router-link to="/">Menthor</router-link>
+      </h1> 
+    </div>
+      <img class="image" src="../../assets/thor.png" />
+    </div>
       <ul>
         <li>
           <router-link to="/coaches">All Coaches</router-link>
@@ -63,7 +69,7 @@ a.router-link-active {
 }
 
 h1 {
-  margin: 0;
+  margin:0;
 }
 
 h1 a {
@@ -96,5 +102,22 @@ header ul {
 
 li {
   margin: 0 0.5rem;
+}
+.image {
+  display: inline-flex;
+  
+  width: 40px;
+  height: 40px;
+}
+
+.logoDiv{
+  display: flex;
+  justify-content: space-between;
+  padding: 2px;
+
+}
+.logoText {
+  /* Opcional: Puedes ajustar el espacio entre el texto y la imagen */
+  margin-right: -5px; /* Ajusta según tus necesidades */
 }
 </style>
