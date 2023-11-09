@@ -48,9 +48,9 @@ export default {
     if (!response.ok) {
       // Manejar errores aquí, si es necesario
       const responseData = await response.json();
-      console.error('Error al eliminar el coach:', responseData.error);
+      console.error('Was not able to delete the Coach:', responseData.error);
       // Puedes lanzar un error o manejarlo de otra manera
-      throw new Error('Error al eliminar el coach');
+      throw new Error('Error to delete the coach');
     }
   
     context.commit('deleteCoach', {

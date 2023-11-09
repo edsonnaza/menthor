@@ -47,6 +47,7 @@ export default {
     localStorage.setItem('token', responseData.idToken);
     localStorage.setItem('userId', responseData.localId);
     localStorage.setItem('tokenExpiration', expirationDate);
+    localStorage.setItem('email',responseData.email);
 
     timer = setTimeout(function() {
       context.dispatch('autoLogout');
@@ -54,12 +55,14 @@ export default {
 
     context.commit('setUser', {
       token: responseData.idToken,
-      userId: responseData.localId
+      userId: responseData.localId,
+      email:responseData.email
     });
   },
   tryLogin(context) {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
+    const email=localStorage.getItem('email');
     const tokenExpiration = localStorage.getItem('tokenExpiration');
 
     const expiresIn = +tokenExpiration - new Date().getTime();
@@ -75,7 +78,8 @@ export default {
     if (token && userId) {
       context.commit('setUser', {
         token: token,
-        userId: userId
+        userId: userId,
+        email:email
       });
     }
   },
@@ -83,12 +87,14 @@ export default {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('tokenExpiration');
+    localStorage.removeItem('email');
 
     clearTimeout(timer);
 
     context.commit('setUser', {
       token: null,
-      userId: null
+      userId: null,
+      email:null
     });
   },
   autoLogout(context) {

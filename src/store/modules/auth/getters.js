@@ -10,5 +10,15 @@ export default {
     },
     didAutoLogout(state) {
       return state.didAutoLogout;
+    },
+    userName(state, _, _2, rootGetters){
+     // const coachId = rootGetters.userId;
+      console.log(rootGetters);
+     // const user=this.$store.getters.coaches?.filter(req => req.id === coachId);
+      
+     
+     // return user.userName;
     }
+
+    
   };

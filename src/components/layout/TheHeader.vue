@@ -22,6 +22,8 @@
         </li>
         <li v-if="isLoggedIn">
           <base-button @click="logout">Logout</base-button>
+          <span class="userName">{{ nameUser[0]?.firstName + ' '+nameUser[0]?.lastName }}</span>  
+          <span class="userName">{{ nameUser[0]?.email   }}</span> 
         </li>
       </ul>
     </nav>
@@ -29,17 +31,28 @@
 </template>
 
 <script>
+ 
 export default {
+  
   computed: {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;
+    },
+
+    nameUser(){
+      return this.$store.getters['coaches/userName'];
     }
+     
+   
   },
   methods: {
     logout() {
       this.$store.dispatch('logout');
       this.$router.replace('/coaches');
-    }
+    },
+
+   
+   
   }
 }
 </script>
@@ -47,7 +60,7 @@ export default {
 <style scoped>
 header {
   width: 100%;
-  height: 5rem;
+  height: 6rem;
   background-color: #3d008d;
   display: flex;
   justify-content: center;
@@ -119,5 +132,10 @@ li {
 .logoText {
   /* Opcional: Puedes ajustar el espacio entre el texto y la imagen */
   margin-right: -5px; /* Ajusta según tus necesidades */
+}
+.userName {
+  display: inline-flex;
+  color:aliceblue;
+  margin-top:6px;
 }
 </style>
