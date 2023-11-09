@@ -7,5 +7,8 @@ export default {
     },
     setFetchTimestamp(state) {
       state.lastFetch = new Date().getTime();
+    },
+    deleteCoach(state,payload){
+        console.log(state,payload);
     }
   };

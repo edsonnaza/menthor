@@ -55,5 +55,31 @@ export default {
     }
 
     context.commit('setRequests', requests);
+  },
+
+  async deleteCoachRequests(context) {
+    const coachId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
+     const response = await fetch(
+      `${process.env.VUE_APP_FIREBASE_DATABASE_URL}/requests/${coachId}.json?auth=` +
+        token,
+        {
+          method:'DELETE',
+        }
+    );
+  
+      const responseData = await response.json();
+
+    if (!response.ok) {
+      const error = new Error(
+        responseData.message || 'Failed to delete the Coach requests.'
+      );
+      throw error;
+    }
+
+    
+
+   
   }
+
 };

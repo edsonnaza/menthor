@@ -33,7 +33,34 @@ export default {
       id: userId
     });
   },
+  async deleteCoach(context,idCoach) {
+   // const idCoach = idCoach;
+    //const userId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
+  
+    const response = await fetch(
+      `${process.env.VUE_APP_FIREBASE_DATABASE_URL}/coaches/${idCoach}.json?auth=` + token,
+      {
+        method: 'DELETE',
+      }
+    );
+  
+    if (!response.ok) {
+      // Manejar errores aquí, si es necesario
+      const responseData = await response.json();
+      console.error('Error al eliminar el coach:', responseData.error);
+      // Puedes lanzar un error o manejarlo de otra manera
+      throw new Error('Error al eliminar el coach');
+    }
+  
+    context.commit('deleteCoach', {
+      id: idCoach
+    });
+    
+  },
+  
   async loadCoaches(context, payload) {
+    
     if (!payload.forceRefresh && !context.getters.shouldUpdate) {
       return;
     }

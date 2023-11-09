@@ -5,7 +5,7 @@
        <div class="logoDiv"> 
         <div class="logoText">
       <h1>
-        <router-link to="/">Menthor</router-link>
+        <router-link to="/">MenThor</router-link>
       </h1> 
     </div>
       <img class="image" src="../../assets/thor.png" />

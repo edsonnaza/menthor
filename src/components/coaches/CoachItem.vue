@@ -8,12 +8,18 @@
       <div class="actions">
         <base-button mode="outline" link :to="coachContactLink">Contact</base-button>
         <base-button link :to="coachDetailsLink">View Details</base-button>
+        <base-button @click="deleteCoach">Delete</base-button>
       </div>
+       
     </li>
   </template>
   
   <script>
+import BaseBadge from '../ui/BaseBadge.vue';
+import BaseButton from '../ui/BaseButton.vue';
   export default {
+  emits: ['loadCoaches'],
+  components: { BaseBadge, BaseButton },
     props: ['id', 'firstName', 'lastName', 'rate', 'areas'],
     computed: {
       fullName() {
@@ -25,7 +31,25 @@
       coachDetailsLink() {
         return this.$route.path + '/' + this.id; // /coaches/c1
       },
+      
     },
+    methods:{
+   
+      async  deleteCoach(){
+          console.log(this.id);
+        try {
+          await  this.$store.dispatch('coaches/deleteCoach', this.id);
+          await this.$store.dispatch('requests/deleteCoachRequests');
+        
+         } catch (error) {
+         console.log(this.error)  ;
+         }
+        
+
+          this.$emit('loadCoaches',true);
+        }
+
+       }
   };
   </script>
   

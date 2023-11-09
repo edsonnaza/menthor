@@ -25,6 +25,7 @@
             :last-name="coach.lastName"
             :rate="coach.hourlyRate"
             :areas="coach.areas"
+            @loadCoaches="loadCoaches"
           ></coach-item>
         </ul>
         <h3 v-else>No coaches found.</h3>
@@ -87,6 +88,7 @@ export default {
       this.activeFilters = updatedFilters;
     },
     async loadCoaches(refresh = false) {
+      console.log('loadCoaches', refresh);
       this.isLoading = true;
       try {
         await this.$store.dispatch('coaches/loadCoaches', {
