@@ -8,12 +8,13 @@ import NotFound from './pages/NotFound.vue';
 import UserAuth from './pages/auth/UserAuth.vue';
 import store from './store/index.js';
 import CoachRegistration from './pages/coaches/CoachRegistration.vue';
-
+import TodoApp from './components/todolist/TodoApp.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', redirect: '/coaches' },
     { path: '/coaches', component: CoachesList },
+    {path:'/todo', component:TodoApp, meta: { requiresAuth: true } },
     {
       path: '/coaches/:id',
       component: CoachDetail,

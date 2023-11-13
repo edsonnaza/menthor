@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import { createPinia } from 'pinia';
 import router from './router'
 import store from './store/index.js';
 import BaseSpinner from './components/ui/BaseSpinner.vue';
@@ -20,9 +21,10 @@ const firebaseConfig = {
   
 const app = createApp(App);
 const firebaseApp = initializeApp(firebaseConfig);
-
+const pinia = createPinia()
 app.use(router);
 app.use(store);
+app.use(pinia); 
 app.use(firebaseApp);
 app.component('base-spinner', BaseSpinner);
 app.component('base-card',BaseCard);

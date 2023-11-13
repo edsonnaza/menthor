@@ -12,12 +12,12 @@ export default {
       return state.didAutoLogout;
     },
     userName(state, _, _2, rootGetters){
-     // const coachId = rootGetters.userId;
-      console.log(rootGetters);
-     // const user=this.$store.getters.coaches?.filter(req => req.id === coachId);
+      const coachId = rootGetters.userId;
+      
+      const user=state.coaches?.filter(req => req.id === coachId);
       
      
-     // return user.userName;
+      return user.userName;
     }
 
     

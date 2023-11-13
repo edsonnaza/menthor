@@ -1,3 +1,11 @@
+<script setup>
+//import store from '../../store/index';
+//import { mapGetters } from 'vuex';
+
+//console.log(mapGetters('coaches', ['userName']),);
+//console.log(store.getters('coaches/userName'));
+//console.log('Nav:',store);
+</script>
 <template>
   <header>
     <nav>
@@ -11,6 +19,9 @@
       <img class="image" src="../../assets/thor.png" />
     </div>
       <ul>
+        <li>
+          <router-link to="/todo">To-Do</router-link>
+        </li>
         <li>
           <router-link to="/coaches">All Coaches</router-link>
         </li>
@@ -40,7 +51,8 @@ export default {
     },
 
     nameUser(){
-      return this.$store.getters['coaches/userName'];
+       
+     return this.$store.getters['coaches/userName'];
     }
      
    

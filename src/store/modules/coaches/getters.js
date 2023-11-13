@@ -21,10 +21,12 @@ export default {
 
   userName(_, getters, _2, rootGetters) {
     const coaches = getters.coaches;
+   
     const userId = rootGetters.userId;
+   
     const userName=coaches.filter(coach => coach.id === userId);
    
-    return userName;
+    return  userName;
     
   },
 };
