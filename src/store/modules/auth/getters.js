@@ -1,3 +1,7 @@
+ import store from '../coaches/getters.js';
+ console.log('store',()=> {return store.coaches});
+ 
+
 export default {
     userId(state) {
       return state.userId;
@@ -12,12 +16,17 @@ export default {
       return state.didAutoLogout;
     },
     userName(state, _, _2, rootGetters){
-      const coachId = rootGetters.userId;
-      
-      const user=state.coaches?.filter(req => req.id === coachId);
+      //const coachId = rootGetters.userId;
+     const  coachData = rootGetters['coaches/getUserName'];
       
      
-      return user.userName;
+     const userNameLogged = coachData.map(coach => {
+      const fullName = coach.firstName + ' ' + coach.lastName;
+      return fullName.trim();
+    });
+    
+     
+      return userNameLogged;
     }
 
     

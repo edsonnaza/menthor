@@ -1,11 +1,4 @@
-<script setup>
-//import store from '../../store/index';
-//import { mapGetters } from 'vuex';
 
-//console.log(mapGetters('coaches', ['userName']),);
-//console.log(store.getters('coaches/userName'));
-//console.log('Nav:',store);
-</script>
 <template>
   <header>
     <nav>
@@ -33,42 +26,36 @@
         </li>
         <li v-if="isLoggedIn">
           <base-button @click="logout">Logout</base-button>
-          <span class="userName">{{ nameUser[0]?.firstName + ' '+nameUser[0]?.lastName }}</span>  
-          <span class="userName">{{ nameUser[0]?.email   }}</span> 
+          <span class="userName" v-if="userNameLogged && userNameLogged[0]">Welcome coach, {{userNameLogged[0]?.firstName + ' ' + userNameLogged[0]?.lastName   }}</span>  
+          
         </li>
       </ul>
     </nav>
   </header>
 </template>
-
-<script>
  
-export default {
-  
-  computed: {
-    isLoggedIn() {
-      return this.$store.getters.isAuthenticated;
-    },
+<script setup>
+import {useStore} from 'vuex';
+import { computed } from 'vue';
 
-    nameUser(){
+const store = useStore();
+
+const isLoggedIn= computed(function() {
+      return store.getters.isAuthenticated;
+    })
+
+  const userNameLogged= computed(function(){
        
-     return this.$store.getters['coaches/userName'];
+     return store.getters['coaches/getUserName'];
+    })
+
+ function logout(){ 
+      store.dispatch('logout');
+      store.$router.replace('/coaches');
     }
-     
-   
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('logout');
-      this.$router.replace('/coaches');
-    },
-
-   
-   
-  }
-}
+ 
+ 
 </script>
-
 <style scoped>
 header {
   width: 100%;

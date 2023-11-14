@@ -46,6 +46,7 @@ function addItemAndClear (item){
     padding: 1rem;
     margin: 2rem auto;
     max-width: 40rem;
+    justify-content: center;
   }
   
   
@@ -58,6 +59,7 @@ function addItemAndClear (item){
   border: 1px solid #ccc;
   padding: 0.15rem;
   padding-left: 10px;
+  border-radius: 5px;
   }
   
 .button {

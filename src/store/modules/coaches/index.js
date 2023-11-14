@@ -7,6 +7,7 @@ export default {
   state() {
     return {
       lastFetch: null,
+      userNamelogged:null,
       coaches: [
         {
           id: 'c1',

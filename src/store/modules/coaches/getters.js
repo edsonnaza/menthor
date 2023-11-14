@@ -19,13 +19,14 @@ export default {
     return (currentTimeStamp - lastFetch) / 1000 > 60;
   },
 
-  userName(_, getters, _2, rootGetters) {
+  getUserName(state, getters, _2, rootGetters) {
     const coaches = getters.coaches;
    
     const userId = rootGetters.userId;
    
-    const userName=coaches.filter(coach => coach.id === userId);
-   
+    const userName=coaches?.filter(coach => coach.id === userId);
+   if(userName) 
+    state.userNamelogged=userName;
     return  userName;
     
   },
