@@ -20,17 +20,15 @@ function getIdCoach(){
 export const useTodoListStore = defineStore('todoList',{
     state:()=>({
         todoList:[],
-        id:0
+        id:0,
+        isloading:false
     }),
     actions: {
       async  addTodo(item){
-      // console.log(token);
+      
         const token = getToken();
         const  idCoach=getIdCoach();
-        console.log(idCoach);
-           // this.todoList.push({item,id:this.id++,completed:false})
-           // console.log(this.todoList);
-            
+      
             const response = await fetch(
                 `${process.env.VUE_APP_FIREBASE_DATABASE_URL}/todolist/${idCoach}.json?auth=` + token,
                 {
@@ -43,9 +41,9 @@ export const useTodoListStore = defineStore('todoList',{
                 const responseData = await response.json();
                 console.error('Was not able to register the task:', responseData.error);
                 // Puedes lanzar un error o manejarlo de otra manera
-                throw new Error('Error to add the new task.');
+               // throw new Error('Error to add the new task.');
               }
-
+               
               await this.loadTasks();
 
         },
@@ -54,13 +52,17 @@ export const useTodoListStore = defineStore('todoList',{
 
             const token = getToken();
             const  idCoach=getIdCoach();
-
+         
+            this.isloading=true;
+            //console.log('isloading',this.isloading);
             if(token){
                 const response = await fetch(
                     `${process.env.VUE_APP_FIREBASE_DATABASE_URL}/todolist/${idCoach}.json?auth=` +
                       token
                   );
                   const responseData = await response.json();
+                  this.isloading=false;
+                 // console.log('isloading',this.isloading);
               
                   if (!response.ok) {
                     const error = new Error(
@@ -82,7 +84,7 @@ export const useTodoListStore = defineStore('todoList',{
                    this.todoList.push(tasks);
                   }
             }
-
+             
             
         },
 
@@ -125,6 +127,7 @@ export const useTodoListStore = defineStore('todoList',{
           },
     },
     getters:{
-        doneTodos: (state)=>state.todoList.filter(todo=>todo.done)
+        doneTodos: (state)=>state.todoList.filter(todo=>todo.done),
+        getIsloading: (state)=>state.isloading
     }
 })

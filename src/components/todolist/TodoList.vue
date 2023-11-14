@@ -3,25 +3,37 @@ import { useTodoListStore } from '../../store/modules/todo/todoList';
 import { storeToRefs } from "pinia";
 import { watchEffect } from 'vue';
  
-
+ 
 const store = useTodoListStore();
-const { todoList } = storeToRefs(store);
+const { todoList, isLoading } = storeToRefs(store);
+
 
 const { toggleCompleted, deleteTodo, loadTasks} = store;
  
+ let errorMessage
+  watchEffect(() => {
+    try {
+         loadTasks();
+    } catch (error) {
+       errorMessage=error.message || 'Something went wrong!';
+    }
 
-watchEffect(() => {
-  loadTasks();
+    
+  
+ 
+ 
 });
- 
- //console.log(loadTasks());
- 
+
+
 
 </script>
 
 <template>
-   
- <div class="table-container">
+    <div>{{ errorMessage }}</div>
+   <div v-if="isLoading">
+    <base-spinner></base-spinner>
+   </div>
+ <div v-else class="table-container">
     <table v-if="todoList" >
         <thead>
             <th>Description</th>
@@ -30,6 +42,7 @@ watchEffect(() => {
         </thead>
 
         <tr v-for="todo in todoList" :key='todo.id' >
+
             <td style="width:90%" :class="{completed:todo.completed}" @click.stop="toggleCompleted(todo.id)" class="span">{{ todo.tasks }}</td>
             <td style="text-align:center; width:15% " class="span" :class="{completed:todo.completed}" @click.stop="toggleCompleted(todo.id)"> &#10004;</td>
             <td style="text-align:center; width:15%"  @click="deleteTodo(todo.id)" class="span"> &#10060;</td>
